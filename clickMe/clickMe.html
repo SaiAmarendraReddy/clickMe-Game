@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Me Game</title>
+    <!-- jquery -->
+    <script src="./jquery.js"></script>
+    <!-- style -->
+    <style>
+        div#title{
+            text-align: center;
+        }
+        div#title h3{
+            margin-bottom: 0px;
+        }
+        div#title span#comment{
+            font-weight: bold;
+            font-style: italic;
+        }
+        div#title span#emoji{
+            font-size: 30px;
+        }
+        div#gameBoard{
+            background-color: red;
+            height: 500px;
+            position: relative;
+            padding: 3px;
+        }
+        div#gameBoard button#clickMe{
+            position: absolute;
+            font-style: italic;
+            font-weight: bold;
+            color: rgb(32, 102, 233);
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+    <!-- title and comments(win or loose) display -->
+    <div id="title">
+        <!-- Game title -->
+        <h1>Welcome to Click Me Game</h1>
+        <!-- comment -->
+        <h3><span id="comment"></span><span id="emoji"></span></h3>
+    </div>
+    <div id="gameBoard">
+        <button id="clickMe">Click Me</button>
+    </div>
+    <!-- scripting -->
+    <script>
+        $(document).ready(function(){
+            /* comment */
+            var comment = $("#comment");
+            /* emoji */
+            var emoji = $("#emoji");
+            /* button */
+            var button = $("#clickMe");
+            /* laugh emojis*/
+            var laugh = ["&#128514;","&#128517;","&#128518;","&#128540;","&#128539;","&#128541;","&#129315;"
+            ,"&#129322;"];
+            /* sad emojis */
+            var sad = ["&#129319;","&#129301;","&#128565;","&#128561;","&#128557;","&#128534;"];
+
+            /* random number generator function */
+            function random(min,max){
+                return Math.floor(Math.random() * (max-min) + min);
+            }
+
+            /* button event */
+            button.mouseover(function(){
+                /* get random values ie, these values should be less than 500*/
+                tp = random(10,470);
+                lft = random(10,1200);
+                button.css({top:tp,left:lft});
+                /* display comment */
+                comment.text("You Never Catch Me ");
+                /* display emoji */
+                emoji.html(laugh[random(0,laugh.length)]);
+            });
+            /* button click */
+            button.click(function(){
+                /* display comment */
+                comment.text("You Won ");
+                /* display emoji */
+                emoji.html(sad[random(0,sad.length)]);
+            });
+        });
+    </script>
+</body>
+</html>
